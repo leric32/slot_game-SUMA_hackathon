@@ -24,7 +24,7 @@ export default class Reel {
         },
       ],
       {
-        //ovo moze da se menja za rucku
+        //ovo moze da se menja za brzinu dugmeta
         duration: this.factor * 1000,
         easing: "ease-in-out",
       }
@@ -47,17 +47,14 @@ export default class Reel {
     //bira koji ce simbol biti sledeci
     //problematicno je sto ne prati red nego uzima random
     for (let i = 4; i < Math.floor(this.factor) * 10 ; i++) {
-      console.log(4 + Math.floor(this.factor) * 10);
       const icon = new Symbol(  
         i >= 10 * Math.floor(this.factor) - 2
           ? nextSymbols[i - Math.floor(this.factor) * 10]
           : undefined
       );
-      console.log(icon.img);
       fragment.appendChild(icon.img);
     }
     for (let i = 0; i < 4 ; i++) {
-      console.log(4 + Math.floor(this.factor) * 10);
       const icon = new Symbol(
         nextSymbols[i]
         /*
@@ -66,10 +63,8 @@ export default class Reel {
           : undefined
         */
       );
-      console.log(icon.img);
       fragment.appendChild(icon.img);
     }
-    console.log("ovde");
     this.symbolContainer.appendChild(fragment);
   }
 

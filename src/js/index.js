@@ -9,6 +9,7 @@ const config = {
   onSpinEnd: (symbols) => {
     console.log("onSpinEnd", symbols);
   },
+
 };
 
 const slot = new Slot(document.getElementById("slot"), config);
