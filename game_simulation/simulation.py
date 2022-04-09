@@ -58,7 +58,7 @@ def get_state_value(matrix):
     if(check_joker(matrix) == 3):
         score += 1000
     elif(check_joker(matrix) == 4):
-        score += 10000
+        score += 4610
 
     if(check_jackpot(matrix)): score += dict_paytable[0]
 
@@ -128,17 +128,16 @@ def start_simulation(credit):
 def calculate_rtf(max_iteration):
     final_sum = 0
     iteration = 0
-    while(iteration < 1000000):
-        credit -= 100
+    while(iteration < max_iteration):
         iteration += 1
         matrix = get_matrix(reels)
-        credit += get_state_value(matrix)
         final_sum += get_state_value(matrix)
     rtf = final_sum / (100 * iteration)
     return rtf
 
 if __name__ == '__main__':
     #start_simulation(1000)
-    for i in [1000, 100000, 100000, 1000000]:
-        rtf = calculate_rtf(i)
-        print(i, rtf)
+    for i in [1000, 10000, 100000, 1000000]:
+        for j in range(10):
+            rtf = calculate_rtf(i)
+            print(i, rtf)
