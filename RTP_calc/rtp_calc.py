@@ -7,6 +7,13 @@ tracks = [
     [0, 0, 4, 4, 5, 4, 5, 2, 1, 5, 2, 5, 9, 3, 4, 8, 5, 4, 2, 3, 5, 4, 5, 2, 3]
 ];
 
+bonus_reels = [
+    [0,0,1,4,1,2,4,1,9,5,3,1],
+    [0,0,5,10,2,3,5,1,1,10,3,4],
+    [0,0,4,3,4,5,1,3,1,5,2,10],
+    [0,0,1,2,9,4,5,2,1,3,2,9]
+    ]
+
 def generateMatrices(tracks):
     matrices = [];
     for line0 in range(len(tracks[0])):
@@ -54,11 +61,11 @@ final_sum_score = 0;
 
 dict_paytable = {
     0 : 50000,
-    1 : 5000,
+    1 : 10000,
     2 : 2500,
     3 : 1000,
     4 : 500,
-    5 : 250
+    5 : 300
 }
 
 number = len(matrices);
@@ -88,10 +95,10 @@ for index, matrix in enumerate(matrices):
             score += dict_paytable[check_trapeze_typeB(matrix, i)];
 
     if(check_joker(matrix) == 3):
-        score += 1500;
+        score += 1000;
         j_counter += 1
     elif(check_joker(matrix) == 4):
-        score += 0;
+        score += 4610;
 
     if(check_jackpot(matrix)): score += dict_paytable[0];
 
