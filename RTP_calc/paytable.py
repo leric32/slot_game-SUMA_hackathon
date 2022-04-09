@@ -1,8 +1,8 @@
 test_matrix=[
     [3,2,3,4],   #<------na
-    [2,2,4,2],
+    [2,2,4,3],
     [2,4,2,3],
-    [2,6,3,2]
+    [2,6,3,3]
 ]
 
 def check_4row(matrix, row):
@@ -40,7 +40,7 @@ def check_minor_4d(matrix):
     max_ind = len(matrix) - 1
     first = matrix[0][max_ind]
     for i in range(1,max_ind):
-        if first != matrix[i][max_ind-1]:
+        if first != matrix[i][max_ind-i]:
             return None
     return first
 
