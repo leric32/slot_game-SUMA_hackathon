@@ -1,8 +1,8 @@
 test_matrix=[
-    [3,2,3,4],   #<------na
-    [2,2,4,3],
-    [2,4,2,3],
-    [2,6,3,3]
+    [8,0,3,4],   #<------na
+    [0,0,4,3],
+    [0,0,2,3],
+    [0,4,8,3]
 ]
 
 def check_4row(matrix, row):
@@ -53,14 +53,86 @@ def check_minor_3d(matrix):
             return matrix[3][max_ind - 3]
     return None
 
+def check_jackpot(matrix):
+    count = 0
+    for i in range(len(matrix)):
+        flag = False
+        for j in range(len(matrix)):
+            if matrix[j][i] != 0:
+                flag = True
+                break
+        if not flag:
+            count+=1
+    if count == 2:
+        return True
+    return False
+
+    
+def check_x2(matrix):
+    for i in range(len(matrix)):
+        flag = False
+        for j in range(len(matrix)):
+            if matrix[j][i] == 9:
+                return True
+    return False
+
+def check_x5(matrix):
+    for i in range(len(matrix)):
+        flag = False
+        for j in range(len(matrix)):
+            if matrix[j][i] == 10:
+                return True
+    return False
+    
+def check_joker(matrix):
+    count = 0
+    for i in range(len(matrix)):
+        flag = False
+        for j in range(len(matrix)):
+            if matrix[j][i] == 8:
+                count += 1
+    return count
+
+def check_zig_zag_typeA(matrix, row):
+    value = matrix[0][row]
+    for i in range(1,4):
+        if(i == 2):
+            if(matrix[i][row] != value): return None
+        else:
+            if(matrix[i][row + 1] != value): return None
+
+    return value
+
+def check_zig_zag_typeB(matrix, row):
+    value = matrix[0][row]
+    for i in range(1,4):
+        if(i == 2):
+            if(matrix[i][row] != value): return None
+        else:
+            if(matrix[i][row - 1] != value): return None
+
+    return value
+
+def check_trapeze_typeA(matrix, row):
+    value = matrix[0][row]
+    for i in range(1, 4):
+        if (i == 3):
+            if (matrix[i][row] != value): return None
+        else:
+            if (matrix[i][row - 1] != value): return None
+
+    return value
+
+def check_trapeze_typeB(matrix, row):
+    value = matrix[0][row]
+    for i in range(1, 4):
+        if (i == 3):
+            if (matrix[i][row] != value): return None
+        else:
+            if (matrix[i][row + 1] != value): return None
+
+    return value
+
+
 if __name__ == "__main__":
-    print(check_major_3d(test_matrix))
-    print(check_major_4d(test_matrix))
-    print(check_minor_3d(test_matrix))
-    print(check_minor_4d(test_matrix))
-    print("4row")
-    for i in range(len(test_matrix)):
-        print(check_4row(test_matrix, i))
-    print("3row")
-    for i in range(len(test_matrix)):
-        print(check_3row(test_matrix, i))
+    print(check_joker(test_matrix))
