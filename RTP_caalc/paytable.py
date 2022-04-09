@@ -1,14 +1,14 @@
 test_matrix=[
     [2,2,3,4],   #<------na
-    [2,2,4,2],
-    [2,4,2,3],
-    [4,6,6,2]
+    [2,2,3,2],
+    [2,4,4,3],
+    [4,6,3,2]
 ]
 
 def check_row(matrix, row):
     first =  matrix[0][row]
-    for i in matrix[1:][row]:
-        if first != i:
+    for i in range(1,len(matrix)):
+        if first != matrix[i][row]:
             return False
     return True
 
@@ -29,4 +29,4 @@ def check_minor_d(matrix):
     return True
 
 if __name__ == "__main__":
-    print(check_minor_d(test_matrix))
+    print(check_row(test_matrix, 2))
