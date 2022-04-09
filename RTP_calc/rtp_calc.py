@@ -1,4 +1,5 @@
-import 
+from paytable import *
+from paytable2 import *
 
 tracks = [
     [1, 2, 3, 4, 5, 2, 4, 7, 4, 2, 5, 4, 2, 2, 4, 6, 7, 5, 6, 4, 3, 1, 2],
@@ -21,17 +22,32 @@ def generateMatrices(tracks):
                     matrices.append(matrix);
     return matrices;
 
-def check_row(matrix, row):
-    first =  matrix[0][row]
-    for i in range(1,len(matrix)):
-        if first != matrix[i][row]:
-            return False
-    return True
 
 matrices = generateMatrices(tracks);
-cnt = 0;
+cntZigZagA = 0;
+cntZigZagB = 0;
+cntTrapezeA = 0
+cntTrapezeB = 0;
+cnt4Row = 0;
 for matrix in matrices:
-    if(check_row(matrix, 0) or check_row(matrix, 1) or check_row(matrix, 2) or check_row(matrix, 3)):
-        cnt += 1;
+    if(check_zig_zag_typeA(matrix, 0) != None): cntZigZagA += 1;
+    if(check_zig_zag_typeA(matrix, 1) != None): cntZigZagA += 1;
+    if(check_zig_zag_typeA(matrix, 2) != None): cntZigZagA += 1;
 
-print("{} / {}".format(cnt, len(matrices)))
+    if (check_zig_zag_typeB(matrix, 1) != None): cntZigZagB += 1;
+    if (check_zig_zag_typeB(matrix, 2) != None): cntZigZagB += 1;
+    if (check_zig_zag_typeB(matrix, 3) != None): cntZigZagB += 1;
+
+    if (check_trapeze_typeA(matrix, 1) != None): cntTrapezeA += 1;
+    if (check_trapeze_typeA(matrix, 2) != None): cntTrapezeA += 1;
+    if (check_trapeze_typeA(matrix, 3) != None): cntTrapezeA += 1;
+
+    if (check_trapeze_typeB(matrix, 0) != None): cntTrapezeB += 1;
+    if (check_trapeze_typeB(matrix, 1) != None): cntTrapezeB += 1;
+    if (check_trapeze_typeB(matrix, 2) != None): cntTrapezeB += 1;
+
+print("ZigZagA - {}".format(cntZigZagA));
+print("ZigZagB - {}".format(cntZigZagB));
+print("TrapezeA - {}".format(cntTrapezeA));
+print("TrapezeB - {}".format(cntTrapezeB));
+print("All cases - {}".format(len(matrices)));
