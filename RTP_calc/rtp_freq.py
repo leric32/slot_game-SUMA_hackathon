@@ -2,9 +2,9 @@ from paytable import *
 
 tracks = [
     [0, 0, 3, 4, 5, 2, 4, 1, 5, 5, 3, 1, 2, 5, 8, 3, 4, 5, 2, 2, 9, 4, 5, 3, 4],
-    [0, 0, 5, 10, 2, 3, 5, 1, 1, 4, 3, 5, 2, 3, 4, 3, 5, 2, 8, 1, 4, 5, 3, 4, 3],
+    [0, 0, 5, 4, 2, 3, 5, 1, 1, 4, 3, 5, 2, 3, 4, 3, 5, 2, 8, 1, 4, 5, 3, 4, 3],
     [0, 0, 4, 3, 4, 5, 5, 3, 1, 5, 2, 5, 1, 5, 8, 4, 5, 10, 4, 2, 5, 4, 5, 4, 4],
-    [0, 0, 4, 4, 5, 4, 5, 2, 1, 5, 2, 5, 9, 3, 4, 8, 5, 4, 2, 3, 5, 4, 5, 2, 3]
+    [0, 0, 4, 4, 5, 4, 5, 2, 1, 5, 2, 5, 3, 3, 4, 8, 5, 4, 2, 3, 5, 4, 5, 2, 3]
 ];
 
 def generateMatrices(tracks):
@@ -50,62 +50,69 @@ cntJocker3 = 0;
 cntJocker4 = 0;
 cntJackpot = 0;
 
-final_sum_score = 0;
-
-dict_paytable = {
-    0 : 50000,
-    1 : 5000,
-    2 : 2500,
-    3 : 1000,
-    4 : 500,
-    5 : 250
-}
-
-number = len(matrices);
-
-j_counter = 0
-for index, matrix in enumerate(matrices):
-    score = 0;
-
+for matrix in matrices:
     for i in range(4):
         if(check_4row(matrix, i) != None):
-            score += dict_paytable[check_4row(matrix, i)];
+            dictRow4[check_4row(matrix, i)] += 1;
+        # elif(check_3row(matrix, i) != None):
+        #      dictRow3[check_3row(matrix, i)] += 1;
 
     if(check_major_4d(matrix) != None):
-        score += dict_paytable[check_major_4d(matrix)];
+        dictDiag4[check_major_4d(matrix)] += 1;
+    # elif(check_major_3d(matrix) != None):
+    #       dictDiag3[check_major_3d(matrix)] += 1;
 
     if (check_minor_4d(matrix) != None):
-        score += dict_paytable[check_minor_4d(matrix)];
+        dictDiag4[check_minor_4d(matrix)] += 1;
+    # elif (check_minor_3d(matrix) != None):
+    #      dictDiag3[check_minor_3d(matrix)] += 1;
 
     for i in range(3):
         if(check_zig_zag_typeA(matrix, i) != None):
-            score += dict_paytable[check_zig_zag_typeA(matrix, i)];
+            dictZigZag[check_zig_zag_typeA(matrix, i)] += 1;
         if (check_zig_zag_typeB(matrix, i + 1) != None):
-            score += dict_paytable[check_zig_zag_typeB(matrix, i + 1)];
+            dictZigZag[check_zig_zag_typeB(matrix, i + 1)] += 1;
         if(check_trapeze_typeA(matrix, i + 1) != None):
-            score += dict_paytable[check_trapeze_typeA(matrix, i + 1)];
+            dictTrapeze[check_trapeze_typeA(matrix, i + 1)] += 1;
         if (check_trapeze_typeB(matrix, i) != None):
-            score += dict_paytable[check_trapeze_typeB(matrix, i)];
+            dictTrapeze[check_trapeze_typeB(matrix, i)] += 1;
 
-    if(check_joker(matrix) == 3):
-        score += 1500;
-        j_counter += 1
-    elif(check_joker(matrix) == 4):
-        score += 0;
+    if(check_joker(matrix) == 3): cntJocker3 += 1;
+    elif(check_joker(matrix) == 4): cntJocker4 += 1;
 
-    if(check_jackpot(matrix)): score += dict_paytable[0];
+    if(check_jackpot(matrix)): cntJackpot += 1;
 
-    if(check_x2(matrix)): score *= 2;
-    if(check_x5(matrix)): score *= 5;
+number = len(matrices);
 
-    #if(index % 10375 == 353):
-        #print("{} - {}".format(int(index / 10375), score))
-        #print(matrix)
+dictRow4[0] = 0;
+dictTrapeze[0] = 0;
+dictZigZag[0] = 0;
+dictDiag4[0] = 0;
 
-    final_sum_score += score;
+print("Row4 - {}".format(dictRow4));
+print("Row3 - {}".format(dictRow3));
+print("Diag4 - {}".format(dictDiag4));
+print("Diag3 - {}".format(dictDiag3));
+print("ZigZag - {}".format(dictZigZag));
+print("Trapeze - {}".format(dictTrapeze));
+print("Jocker3 - {}".format(cntJocker3 / number));
+print("Jocker4 - {}".format(cntJocker4 / number));
+print("Jackpot - {}".format(cntJackpot / number));
 
+sum_all = [0] * 10;
 
-print("RTF - {}".format(final_sum_score / (100 * number)))
-print(j_counter/number)
-print("number = {}".format(number))
-#print("RTP = ".format(final_sum_score / (100 * number)))
+for i in range(10):
+    sum_all[i] = (dictTrapeze[i] + dictDiag4[i] + dictZigZag[i] + dictRow4[i]) / number;
+
+print("Sum all - {}".format(sum_all));
+
+print((sum(dictTrapeze) + sum(dictZigZag) + sum(dictDiag3)
+      + sum(dictDiag4) + sum(dictRow3) + sum(dictRow4)) / len(matrices))
+
+# print("ZigZagA - {}".format(cntZigZagA));
+# print("ZigZagB - {}".format(cntZigZagB));
+# print("TrapezeA - {}".format(cntTrapezeA));
+# print("TrapezeB - {}".format(cntTrapezeB));
+# print("Row4 - {}".format(cnt4Row));
+# print("Row3 - {}".format(cnt3Row));
+# print("All cases - {}".format(len(matrices)));
