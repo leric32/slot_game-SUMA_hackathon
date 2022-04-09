@@ -195,7 +195,7 @@ export default class Checked {
         }
       }
     
-      if (first < 1 || first > 5) {
+      if (value < 1 || first > 5) {
         return false;
       }
       return true;
@@ -217,7 +217,7 @@ export default class Checked {
         }
       }
     
-      if (first < 1 || first > 5) {
+      if (value < 1 || value > 5) {
         return false;
       }
       return true;
@@ -261,7 +261,7 @@ export default class Checked {
         }
       }
     
-      if (first < 1 || first > 5) {
+      if (value < 1 || value > 5) {
         return false;
       }
       return true;
@@ -275,17 +275,11 @@ export default class Checked {
         if (this.check_4row(this.nextSymbols, i) == true) {
           //treba promeniti vrednost
           this.sum += 1;
-        }else if(this.check_3row(this.nextSymbols, i) == true){
-          //treba promeniti vrednost
-          this.sum += 1;
         }
       }
       
       //checked 4 or 3 on major diag
       if (this.check_major_4d(this.nextSymbols) == true) {
-        //treba promeniti vrednost
-        this.sum += 1;
-      }else if(this.check_major_3d(this.nextSymbols) == true){
         //treba promeniti vrednost
         this.sum += 1;
       }
@@ -294,11 +288,8 @@ export default class Checked {
       if (this.check_minor_4d(this.nextSymbols) == true) {
         //treba promeniti vrednost
         this.sum += 1;
-      }else if(this.check_minor_3d(this.nextSymbols) == true){
-        //treba promeniti vrednost
-        this.sum += 1;
       }
-
+      
       //checked for jackpot
       if(this.check_jackpot(this.nextSymbols) == true){
         //treba da se promeni vrednost za jackpot
