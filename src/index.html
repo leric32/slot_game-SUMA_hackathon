@@ -12,7 +12,29 @@
     />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
-  <body class="container-fluid">
+  
+  <body class="body container-fluid" id="body">
+    <div id="overlay"></div>
+    <div class="cards h-100" id="bonus_cards">
+      <div class="row h-100 w-100 justify-content-center align-items-center">
+        <div class="d-flex" id="card_container">
+          <a class="card" id="card">LuckyCard</a>
+          <a class="card" id="card">LuckyCard</a>
+          <a class="card" id="card">LuckyCard</a>
+          <a class="card" id="card">LuckyCard</a>
+        </div>
+      </div>
+    </div>
+    <div class="cards1 h-100" id="card_reveal">
+      <div class="row h-100 w-100 justify-content-center align-items-center">
+        <div class="d-flex" id="card_container">
+          <a class="card_r" id="card1">0</a>
+          <a class="card_r" id="card2">500</a>
+          <a class="card_r" id="card3">1000</a>
+          <a class="card_r" id="card4">2500</a>
+        </div>
+      </div>
+    </div>
     <div class="row d-flex justify-content-between">
       <div class="col-2">
         <div class="row">
@@ -21,10 +43,14 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-12">
-            <label>Stanje:&nbsp&nbsp&nbsp<span id="suma">0</span></label></br>
-            <label>Ulozi:</label><input type="number" min="0" id="ulog">
-            <button type="button" class="btn btn-light" id="ulozi">Light</button>
+          <div class="col-12" id="statesPanel">
+            <label>Balance:&nbsp&nbsp&nbsp<span id="suma">0</span></label></br>
+            <label>Bet:</label>
+            <div class="d-flex" id="ulog_box">
+              <input type="number" min="0" id="ulog" value="0">
+              <button type="button" class="btn btn-outline-light" id="ulozi">Bid</button>
+            </div>
+            
           </div>
         </div>
       </div>
@@ -56,13 +82,41 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script>
+
+      let arr = [0, 500, 1000, 2500];
       $("#ulozi").click(function() {
         var i = parseInt($("#ulog").val());
         var j = parseInt($("#suma").html());
         $("#suma").html(i+j);
-        $("#ulog").val('');
+        $("#ulog").val('0');
         console.log(j);
       })
+
+      $(".card").click(function() {
+        let idx = Math.floor((Math.random() * 4));
+        $(".cards").css('z-index', 1);
+        $("#card_reveal").show();
+        var i = arr[idx];
+        var j = parseInt($("#suma").html());
+        $("#suma").html(i+j);
+        if(idx == 0) $("#card1").show();
+        if(idx == 1) $("#card2").show();
+        if(idx == 2) $("#card3").show();
+        if(idx == 3) $("#card4").show();
+        
+
+
+      })
+      $(".card_r").click(function() {
+            
+            $("#overlay").hide();
+            $(".cards").hide()
+            $(".cards").css('z-index', 99);
+            $(".cards1").hide()
+            $(".card_r").hide()
+
+        })
+
     </script>
   </body>
 </html>

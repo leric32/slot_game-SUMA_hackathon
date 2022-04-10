@@ -49,11 +49,17 @@ matrices = generateMatrices(classic_reels);
 final_sum_score = 0;
 
 dict_paytable = {
+    #jackpot
     0 : 50000,
+    #donut
     1 : 10000,
+    #cupcake
     2 : 2500,
+    #pancakes
     3 : 1000,
+    #icecream
     4 : 500,
+    #cookie
     5 : 300
 }
 

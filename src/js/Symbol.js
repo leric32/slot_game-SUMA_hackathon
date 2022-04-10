@@ -33,9 +33,20 @@ export default class Symbol {
       "joker",
       "J",
       "A",
+      "C",
+      "K",
+      "P",
+      "O",
+      "T",
+      "esc",
     ];
   }
 
+//donut
+//cupcake
+//pancakes
+//icecream
+//cookie
 
   static get reels() {
     return [
@@ -150,12 +161,92 @@ export default class Symbol {
   ]
   }
 
+  static get bonus_reels() {
+    return [
+      [
+      "J",
+      "P",
+      "donut",
+      "icecream",
+      "donut",
+      "cupcake",
+      "icecream",
+      "donut",
+      "x2",
+      "cookie",
+      "pancakes",
+      "donut",
+      ],
+      [
+        "A",
+        "O",
+        "cookie",
+        "x5",
+        "cupcake",
+        "pancakes",
+        "cookie",
+        "donut",
+        "donut",
+        "x5",
+        "pancakes",
+        "icecream",
+        ],
+        [
+          "C",
+          "T",
+          "icecream",
+          "pancakes",
+          "icecream",
+          "cookie",
+          "donut",
+          "pancakes",
+          "donut",
+          "cookie",
+          "cupcake",
+          "x5",
+          ],
+          [
+            "K",
+            "esc",
+            "donut",
+            "cupcake",
+            "x2",
+            "icecream",
+            "cookie",
+            "cupcake",
+            "donut",
+            "pancakes",
+            "cupcake",
+            "x2",
+            ],
+    ]
+  }
+
   static random() {
     return this.symbols[Math.floor(Math.random() * this.symbols.length)];
   }
 
   static randomReel(i){
     let reel = this.reels[i];
+    console.log(i);
+    console.log(reel);
+    let rnd = Math.floor(Math.random() * reel.length);
+    let rnd_end = (rnd+4);
+    console.log("reels[i]");
+    console.log(rnd);
+    console.log(rnd_end);
+    if(rnd_end < reel.length){
+      console.log(reel.slice(rnd, rnd_end));
+      return reel.slice(rnd, rnd_end);
+    }
+    rnd_end = rnd_end % reel.length;
+    let arr = reel.slice(rnd);
+    arr = arr.concat(reel.slice(0, rnd_end));
+    return arr;
+  }
+
+  static randomBonusReel(i){
+    let reel = this.bonus_reels[i];
     console.log(i);
     console.log(reel);
     let rnd = Math.floor(Math.random() * reel.length);
