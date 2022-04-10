@@ -102,9 +102,12 @@ export default class Slot {
     console.log(this.sum);
     console.log(news);
     
-    this.spec = -2;
-    //this.spec = checkIns.checkedJoker();
-    if(this.is_bonus) this.bonus_counter-=1;
+    
+    this.spec = checkIns.checkedJoker();
+    if(this.is_bonus == true) this.bonus_counter-=1;
+    console.log("bonus");
+    console.log(this.is_bonus);
+    console.log(this.bonus_counter);
     if(this.bonus_counter == 0){
       this.is_bonus = false;
       this.bodyElem.classList.remove('bonus_body');
@@ -126,7 +129,7 @@ export default class Slot {
     }
     if(this.spec == -2){
       this.is_bonus = true;
-      this.bonus_counter = 2;
+      this.bonus_counter = 10;
       this.bodyElem.classList.add('bonus_body');
       this.bodyElem.classList.remove('body');
     }
