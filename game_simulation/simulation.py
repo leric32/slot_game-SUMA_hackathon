@@ -109,21 +109,19 @@ def start_simulation(credit):
     credits = []
     iterations.append(iteration)
     credits.append(credit)
-    while(iteration < 1000000):
+    while(credit > 100 and iteration < 1000000):
         credit -= 100
         iteration += 1
-        #matrix = [get_slice_of_4(reels[i]) for i in range(4)]
         matrix = get_matrix(reels)
         credit += get_state_value(matrix)
         iterations.append(iteration)
         credits.append(credit)
         final_sum += get_state_value(matrix)
-    print("RTF - {}".format(final_sum / (100 * iteration)))
-    #plt.plot(iterations, credits, color='r')
-    #plt.grid(True)
-    #plt.xlabel('Iteration')
-    #plt.ylabel('Credit')
-    #plt.show()
+    plt.plot(iterations, credits, color='r')
+    plt.grid(True)
+    plt.xlabel('Iteration')
+    plt.ylabel('Credit')
+    plt.show()
 
 def calculate_rtf(max_iteration):
     final_sum = 0
@@ -136,8 +134,12 @@ def calculate_rtf(max_iteration):
     return rtf
 
 if __name__ == '__main__':
+<<<<<<< Updated upstream
     #start_simulation(1000)
     for i in [10000000]:
         for j in range(10):
             rtf = calculate_rtf(i)
             print(i, rtf)
+=======
+    start_simulation(10000)
+>>>>>>> Stashed changes
