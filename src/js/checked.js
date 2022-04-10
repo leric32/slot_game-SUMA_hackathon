@@ -135,6 +135,7 @@ export default class Checked {
     
         for (var j = 0; j < matrix.length; j += 1) {
           //mora se proemniti u specijalni znak
+          //PROMENI DA MORA DVA PUTA x2
           if (matrix[j][i] === "x2") {
             return true;
           }
@@ -195,7 +196,7 @@ export default class Checked {
         }
       }
     
-      if (value < 1 || first > 5) {
+      if (value < 1 || value > 5) {
         return false;
       }
       return true;
@@ -239,7 +240,7 @@ export default class Checked {
         }
       }
     
-      if (first < 1 || first > 5) {
+      if (value < 1 || value > 5) {
         return false;
       }
       return true;

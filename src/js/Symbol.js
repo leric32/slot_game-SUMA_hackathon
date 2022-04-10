@@ -40,8 +40,8 @@ export default class Symbol {
   static get reels() {
     return [
       [
-      "joker",
-      "joker",
+      "J",
+      "P",
       "pancakes",
       "icecream",
       "cookie",
@@ -67,8 +67,8 @@ export default class Symbol {
       "icecream",
     ],
     [
-      "joker",
-      "joker",
+      "A",
+      "O",
       "cookie",
       "x5",
       "cupcake",
@@ -94,8 +94,8 @@ export default class Symbol {
       "pancakes",
     ],
     [
-      "joker",
-      "joker",
+      "C",
+      "T",
       "icecream",
       "pancakes",
       "icecream",
@@ -121,8 +121,8 @@ export default class Symbol {
       "icecream",
     ],
     [
-      "joker",
-      "joker",
+      "K",
+      "esc",
       "icecream",
       "icecream",
       "cookie",
