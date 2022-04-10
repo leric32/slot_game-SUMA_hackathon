@@ -33,6 +33,11 @@ export default class Symbol {
     ];
   }
 
+//donut
+//cupcake
+//pancakes
+//icecream
+//cookie
 
   static get reels() {
     return [

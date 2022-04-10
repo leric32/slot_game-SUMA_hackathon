@@ -289,7 +289,7 @@ export default class Checked {
         //treba promeniti vrednost
         this.sum += 1;
       }
-      
+
       //checked for jackpot
       if(this.check_jackpot(this.nextSymbols) == true){
         //treba da se promeni vrednost za jackpot
