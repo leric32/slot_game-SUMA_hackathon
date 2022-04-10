@@ -137,7 +137,7 @@ def calculate_rtf(max_iteration):
 
 if __name__ == '__main__':
     #start_simulation(1000)
-    for i in [1000, 10000, 100000, 1000000]:
+    for i in [10000000]:
         for j in range(10):
             rtf = calculate_rtf(i)
             print(i, rtf)
